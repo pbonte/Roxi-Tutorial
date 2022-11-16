@@ -121,26 +121,6 @@ async function generateObservationEvent(eventNumber) {
                 default:
                     break;
             }
-            store.addQuad(
-                namedNode(RoxiPrefix + "observation/" + eventNumber),
-                namedNode(RDFType),
-                namedNode(sosa + "Observation")
-            ),
-                store.addQuad(
-                    namedNode(RoxiPrefix + "observation/" + eventNumber),
-                    namedNode(sosa + "hasFeatureOfInterest"),
-                    namedNode(RoxiPrefix + randomPerson)
-                ),
-                store.addQuad(
-                    namedNode(RoxiPrefix + "observation/" + eventNumber),
-                    namedNode(sosa + "madeBySensor"),
-                    namedNode(RoxiPrefix + "sensorRFID" + randomRoom)
-                ),
-                store.addQuad(
-                    namedNode(RoxiPrefix + "sensorRFID" + randomRoom),
-                    namedNode(sosa + "isHostedBy"),
-                    namedNode(RoxiPrefix + randomRoom)
-                )
             break;
         default:
             console.log('There has been an error, the type of event is not defined.');
@@ -193,21 +173,6 @@ async function generateTracingEvent(eventNumber) {
         namedNode(RoxiPrefix + "detectedWith"),
         namedNode(RoxiPrefix + coupleMap.get(person))
     )
-    // store.addQuad(
-    //     namedNode(RoxiPrefix + "observation/" + eventNumber),
-    //     namedNode(RDFType),
-    //     namedNode(RoxiPrefix + "ContactTracing")
-    // )
-    // store.addQuadI
-    //     namedNode(RoxiPrefix + "observation/" + eventNumber),
-    //     namedNode(RoxiPrefix + "who"),
-    //     namedNode(RoxiPrefix + person)
-    // )
-    // store.addQuad(
-    //     namedNode(RoxiPrefix + person),
-    //     namedNode(RoxiPrefix + "isWith"),
-    //     namedNode(RoxiPrefix + coupleMap.get(person))
-    // )
     return store;
 }
 
