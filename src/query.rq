@@ -1,3 +1,0 @@
-select ?o where {
-    ?s ?p ?o
-}
