@@ -67,7 +67,7 @@ async function generateObservationEvent(eventNumber) {
                 namedNode(RoxiPrefix + randomPerson)
             )
             store.addQuad(
-                namedNode(RoxiPrefix + "Post/" + eventNumber),
+                namedNode(RoxiPrefix + randomPerson),
                 namedNode(RoxiPrefix + "hasCheckIn"),
                 namedNode(RoxiPrefix + randomRoom)
             )
@@ -95,6 +95,11 @@ async function generateObservationEvent(eventNumber) {
                             namedNode(sosa + "isHostedBy"),
                             namedNode(RoxiPrefix + "Blue")
                         )
+                        store.addQuad(
+                            namedNode(RoxiPrefix + randomPerson),
+                            namedNode(RoxiPrefix + "isIn"),
+                            namedNode(RoxiPrefix + "Blue")
+                        )
                     break;
                 case 'Red':
                     store.addQuad(
@@ -115,7 +120,12 @@ async function generateObservationEvent(eventNumber) {
                     namedNode(
                         namedNode(RoxiPrefix + "sensorRFID" + "Red"),
                         namedNode(saref + "isPropertyOf"),
-                        namedNode(RoxiPrefix + "Rex")   
+                        namedNode(RoxiPrefix + "Red")
+                    )
+                    store.addQuad(
+                        namedNode(RoxiPrefix + randomPerson),
+                        namedNode(RoxiPrefix + "isIn"),
+                        namedNode(RoxiPrefix + "Red")
                     )
                     break;
                 default:
@@ -126,10 +136,8 @@ async function generateObservationEvent(eventNumber) {
             console.log('There has been an error, the type of event is not defined.');
             break;
     }
-
     return store;
 }
-
 
 async function generateCovidEvent(eventNumber) {
     const randomPerson = people[Math.floor(Math.random() * people.length)];
@@ -144,7 +152,7 @@ async function generateCovidEvent(eventNumber) {
         namedNode(RoxiPrefix + randomPerson),
     )
     store.addQuad(
-        namedNode(RoxiPrefix + "observation/" + eventNumber),
+        namedNode(RoxiPrefix + randomPerson),
         namedNode(RoxiPrefix + "hasResult"),
         namedNode(RoxiPrefix + "positive")
     )
@@ -169,11 +177,12 @@ async function generateTracingEvent(eventNumber) {
         namedNode(sioc + "User")
     )
     store.addQuad(
-        namedNode(RoxiPrefix + "contactTracingPost" + eventNumber),
+        namedNode(RoxiPrefix + person),
         namedNode(RoxiPrefix + "detectedWith"),
         namedNode(RoxiPrefix + coupleMap.get(person))
     )
     return store;
+
 }
 
 module.exports = { generateObservationEvent, generateCovidEvent, generateTracingEvent }
