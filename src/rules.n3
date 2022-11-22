@@ -1,0 +1,9 @@
+@prefix : <http://pbonte.github.io/roxi/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix saref: <https://saref.etsi.org/core/> .
+@prefix sioc: <http://www.w3.org/Submission/sioc-spec/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# The location of the person is with either a facebook post or an RFID sensor which uses different ontologies. 
+# Write a rule to align the location of the person in the room.

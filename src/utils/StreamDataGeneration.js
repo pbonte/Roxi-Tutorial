@@ -3,9 +3,8 @@ const vocabularies = require('./Vocabularies');
 const { DataFactory } = n3;
 const { namedNode } = DataFactory;
 const store = new n3.Store()
-const { RoxiPrefix, RDFType, sosa, saref, sioc, rdfs } = vocabularies
+const { RoxiPrefix, RDFType, sosa, saref, sioc, rdfs } = require('./Vocabularies');
 
-const eventPeople = ['Bob', 'John', 'Alice', 'Elena'];
 const people = ['Bob', 'John', 'Alice', 'Elena', 'Carl', 'David']
 const roomList = ['Red', 'Blue'];
 const names = {
@@ -16,32 +15,29 @@ const names = {
     David: 'David',
     Elena: 'Elena'
 }
-const rooms = {
-    Red: 'Red',
-    Blue: 'Blue'
-}
 const events = {
     Facebook: 'Facebook',
     RFID: 'RFID',
     Contact: 'Contact',
     COVID: 'COVID'
 }
-const isWithPerson = ['Carl', 'David'];
 
 let personEventMap = new Map();
 personEventMap.set(names.Alice, events.RFID);
-personEventMap.set(names.John, events.RFID);
-personEventMap.set(names.Bob, events.Facebook);
+personEventMap.set(names.Bob, events.RFID);
+personEventMap.set(names.Carl, events.RFID);
+personEventMap.set(names.David, events.Facebook);
 personEventMap.set(names.Elena, events.Facebook);
+personEventMap.set(names.John, events.Facebook);
 
 let coupleMap = new Map();
-coupleMap.set('Carl', 'Bob');
-coupleMap.set('David', 'Elena');
-
+coupleMap.set('Alice', 'Bob');
+coupleMap.set('Elena', 'John');
+coupleMap.set('Carl', 'David');
 
 async function generateObservationEvent(eventNumber) {
     let randomRoom = roomList[Math.floor(Math.random() * roomList.length)];
-    let randomPerson = eventPeople[Math.floor(Math.random() * eventPeople.length)];
+    let randomPerson = people[Math.floor(Math.random() * people.length)];
 
     let eventType = personEventMap.get(randomPerson);
     switch (eventType) {
@@ -95,11 +91,11 @@ async function generateObservationEvent(eventNumber) {
                             namedNode(sosa + "isHostedBy"),
                             namedNode(RoxiPrefix + "Blue")
                         )
-                        store.addQuad(
-                            namedNode(RoxiPrefix + randomPerson),
-                            namedNode(RoxiPrefix + "isIn"),
-                            namedNode(RoxiPrefix + "Blue")
-                        )
+                    store.addQuad(
+                        namedNode(RoxiPrefix + randomPerson),
+                        namedNode(RoxiPrefix + "isIn"),
+                        namedNode(RoxiPrefix + "Blue")
+                    )
                     break;
                 case 'Red':
                     store.addQuad(
@@ -144,7 +140,7 @@ async function generateCovidEvent(eventNumber) {
     store.addQuad(
         namedNode(RoxiPrefix + "observation/" + eventNumber),
         namedNode(RDFType),
-        namedNode(RoxiPrefix + "TestResult")
+        namedNode(RoxiPrefix + "CovidTestResult")
     )
     store.addQuad(
         namedNode(RoxiPrefix + "observation/" + eventNumber),
@@ -160,7 +156,7 @@ async function generateCovidEvent(eventNumber) {
 }
 
 async function generateTracingEvent(eventNumber) {
-    let person = isWithPerson[Math.floor(Math.random() * isWithPerson.length)];
+    let person = people[Math.floor(Math.random() * people.length)];
     store.addQuad(
         namedNode(RoxiPrefix + "contactTracingPost/" + eventNumber),
         namedNode(rdfs + "subClassOf"),
@@ -177,9 +173,9 @@ async function generateTracingEvent(eventNumber) {
         namedNode(sioc + "User")
     )
     store.addQuad(
-        namedNode(RoxiPrefix + person),
+        namedNode(RoxiPrefix + coupleMap.get(person)),
         namedNode(RoxiPrefix + "detectedWith"),
-        namedNode(RoxiPrefix + coupleMap.get(person))
+        namedNode(RoxiPrefix + person)
     )
     return store;
 
