@@ -1,43 +1,22 @@
 const n3 = require('n3');
-const vocabularies = require('./Vocabularies');
 const { DataFactory } = n3;
 const { namedNode } = DataFactory;
 const store = new n3.Store()
 const { RoxiPrefix, RDFType, sosa, saref, sioc, rdfs } = require('./Vocabularies');
-
+const { populatePersonEventMap, populateCoupleMap } = require('./HelperFunctions');
 const people = ['Bob', 'John', 'Alice', 'Elena', 'Carl', 'David']
 const roomList = ['Red', 'Blue'];
-const names = {
-    Carl: 'Carl',
-    Bob: 'Bob',
-    John: 'John',
-    Alice: 'Alice',
-    David: 'David',
-    Elena: 'Elena'
-}
-const events = {
-    Facebook: 'Facebook',
-    RFID: 'RFID',
-    Contact: 'Contact',
-    COVID: 'COVID'
-}
+const typeEventList = ['RFID', 'Facebook'];
 
 let personEventMap = new Map();
-personEventMap.set(names.Alice, events.RFID);
-personEventMap.set(names.Bob, events.RFID);
-personEventMap.set(names.Carl, events.RFID);
-personEventMap.set(names.David, events.Facebook);
-personEventMap.set(names.Elena, events.Facebook);
-personEventMap.set(names.John, events.Facebook);
-
 let coupleMap = new Map();
-coupleMap.set('Alice', 'Bob');
-coupleMap.set('Elena', 'John');
-coupleMap.set('Carl', 'David');
 
 async function generateObservationEvent(eventNumber) {
     let randomRoom = roomList[Math.floor(Math.random() * roomList.length)];
     let randomPerson = people[Math.floor(Math.random() * people.length)];
+    let randomEvent = typeEventList[Math.floor(Math.random() * typeEventList.length)];
+
+    populatePersonEventMap(randomPerson, randomEvent, personEventMap)
 
     let eventType = personEventMap.get(randomPerson);
     switch (eventType) {
@@ -136,7 +115,7 @@ async function generateObservationEvent(eventNumber) {
 }
 
 async function generateCovidEvent(eventNumber) {
-    const randomPerson = people[Math.floor(Math.random() * people.length)];
+    let randomPerson = people[Math.floor(Math.random() * people.length)];
     store.addQuad(
         namedNode(RoxiPrefix + "observation/" + eventNumber),
         namedNode(RDFType),
@@ -157,6 +136,10 @@ async function generateCovidEvent(eventNumber) {
 
 async function generateTracingEvent(eventNumber) {
     let person = people[Math.floor(Math.random() * people.length)];
+    let personTwo = people[Math.floor(Math.random() * people.length)]
+
+    populateCoupleMap(person, personTwo, coupleMap);
+
     store.addQuad(
         namedNode(RoxiPrefix + "contactTracingPost/" + eventNumber),
         namedNode(rdfs + "subClassOf"),

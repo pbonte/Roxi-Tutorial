@@ -6,8 +6,11 @@ PREFIX saref: <https://saref.etsi.org/core/>
 PREFIX sioc: <http://www.w3.org/Submission/sioc-spec/> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 
-# Write a query to find out which person is infected with COVID and they are in which room.
+select * where {
+    ?s ?p ?o
+}
 
+# Write a query to find out which person is infected with COVID and they are in which room.
 
 # Comment / Remove the above query.
 

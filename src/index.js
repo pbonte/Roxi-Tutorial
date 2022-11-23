@@ -1,6 +1,7 @@
 const dataGeneration = require('./utils/StreamDataGeneration')
 const roxi = require('roxi-js');
 const fs = require('fs');
+const { sleep } = require('./utils/HelperFunctions');
 
 let bindingCounter = 0;
 let eventTimestamp = 0;
@@ -13,26 +14,31 @@ Configuring The Roxi Reasoner
 let query = fs.readFileSync('src/query.rq', 'utf-8').toString();
 let rules = fs.readFileSync('src/rules.n3', 'utf-8').toString();
 let abox = ""
-let windowWidth = 100;
-let windowSlide = 20;
-let numberOfObservationsToBeGenerated = 50;
+let windowWidth = 60;
+let windowSlide = 15;
+let numberOfObservationsToBeGenerated = 100;
 let streamingEngine = roxi.JSRSPEngine.new(windowWidth, windowSlide, rules, abox, query, rsp_callback);
 
 async function executeRSP() {
     let eventNumber = 0;
     while (counterValue < numberOfObservationsToBeGenerated) {
         let observationEvent = await dataGeneration.generateObservationEvent(eventNumber);
+        await sleep(1000);
         eventNumber = eventNumber + 1;
         addToRSP(observationEvent);
         let randomValue = Math.floor(Math.random() * 11);
         if (randomValue >= 5) {
             let covidEvent = await dataGeneration.generateCovidEvent(eventNumber);
+            await sleep(1000);
             addToRSP(covidEvent);
             eventNumber = eventNumber + 1;
         }
         else {
             let tracingEvent = await dataGeneration.generateTracingEvent(eventNumber);
+            await sleep(1000);
+
             addToRSP(tracingEvent);
+
             eventNumber = eventNumber + 1;
         }
         counterValue = counterValue + 1;
@@ -40,7 +46,7 @@ async function executeRSP() {
 }
 async function rsp_callback(bindings) {
     console.log('------------------------------------------------------');
-    console.log(`Variable   ------------ URI---------------  Timestamp`);
+    console.log(`Variable   ------------Value---------------  Timestamp`);
     console.log();
     for (const value of bindings) {
         console.log(`${value.getVar()}  ${value.getValue()} @ ${bindingCounter}`);
