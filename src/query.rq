@@ -17,9 +17,7 @@ select ?s ?p ?o where {
 # Task 1: Write a query to find the location (?room) of the person (?person)
 
 
-# select ?person ?room where {
-#     ?person :isIn ?room .
-# }
+
 
 # Remember : You have to add the rules (in src/rules.n3 file) 
 # to find the location. One rule for getting the location from SOSA 
@@ -29,21 +27,13 @@ select ?s ?p ?o where {
 # Task 2: Write a query to find out the COVID positive person (?person) and 
 # his location (?room)
 
-# select ?person ?room where {
-#     ?person :isIn ?room .
-#     ?person :hasResult :positive .
-# }
 
 
 # Delete the above query.
 # Task 3: Write a query to find the person at risk of 
 # COVID (?personAtRisk )with contact tracing.
 
-# select ?personAtRisk where {
-#     ?person :isIn ?room .
-#     ?person :hasResult :positive .
-#     ?personAtRisk :detectedWith ?person .
-# }
+
 
 
 # Best of Luck :)

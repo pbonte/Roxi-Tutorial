@@ -7,9 +7,3 @@
 
 
 
-{?observation sosa:hasFeatureOfInterest ?person . ?observation sosa:madeBySensor ?sensorValue . ?sensorValue sosa:hasLocation ?room .} => {?person :isIn ?room} 
-
-
-
-{?person :hasCheckIn ?room} => {?person :isIn ?room}
-
