@@ -342,13 +342,13 @@ class RoxiReasoner {
 }
 module.exports.RoxiReasoner = RoxiReasoner;
 
+module.exports.__wbindgen_object_drop_ref = function(arg0) {
+    takeObject(arg0);
+};
+
 module.exports.__wbg_jsbinding_new = function(arg0) {
     const ret = JSBinding.__wrap(arg0);
     return addHeapObject(ret);
-};
-
-module.exports.__wbindgen_object_drop_ref = function(arg0) {
-    takeObject(arg0);
 };
 
 module.exports.__wbindgen_object_clone_ref = function(arg0) {
