@@ -3,7 +3,7 @@ const { DataFactory } = n3;
 const { namedNode } = DataFactory;
 const store = new n3.Store()
 const { RoxiPrefix, RDFType, sosa, saref, sioc, rdfs } = require('./Vocabularies');
-const { populatePersonEventMap, populateCoupleMap } = require('./HelperFunctions');
+const { populateMap } = require('./HelperFunctions');
 const people = ['Bob', 'John', 'Alice', 'Elena', 'Carl', 'David']
 const roomList = ['Red', 'Blue'];
 const typeEventList = ['RFID', 'Facebook'];
@@ -16,7 +16,7 @@ async function generateObservationEvent(eventNumber) {
     let randomPerson = people[Math.floor(Math.random() * people.length)];
     let randomEvent = typeEventList[Math.floor(Math.random() * typeEventList.length)];
 
-    populatePersonEventMap(randomPerson, randomEvent, personEventMap)
+    populateMap(randomPerson, randomEvent, personEventMap)
 
     let eventType = personEventMap.get(randomPerson);
     switch (eventType) {
@@ -63,18 +63,13 @@ async function generateObservationEvent(eventNumber) {
                         store.addQuad(
                             namedNode(RoxiPrefix + "observation/" + eventNumber),
                             namedNode(sosa + "madeBySensor"),
-                            namedNode(RoxiPrefix + "sensorRFID" + "Blue")
-                        ),
+                            namedNode(RoxiPrefix + "sensorRFID" + "-Blue")
+                        )
                         store.addQuad(
-                            namedNode(RoxiPrefix + "sensorRFID" + "Blue"),
-                            namedNode(sosa + "isHostedBy"),
+                            namedNode(RoxiPrefix + "sensorRFID" + "-Blue"),
+                            namedNode(sosa + "isPropertyOf"),
                             namedNode(RoxiPrefix + "Blue")
                         )
-                    store.addQuad(
-                        namedNode(RoxiPrefix + randomPerson),
-                        namedNode(RoxiPrefix + "isIn"),
-                        namedNode(RoxiPrefix + "Blue")
-                    )
                     break;
                 case 'Red':
                     store.addQuad(
@@ -90,11 +85,6 @@ async function generateObservationEvent(eventNumber) {
                     store.addQuad(
                         namedNode(RoxiPrefix + "observation/" + eventNumber),
                         namedNode(saref + "isMeasurementOf"),
-                        namedNode(RoxiPrefix + "Red")
-                    )
-                    namedNode(
-                        namedNode(RoxiPrefix + "sensorRFID" + "Red"),
-                        namedNode(saref + "isPropertyOf"),
                         namedNode(RoxiPrefix + "Red")
                     )
                     store.addQuad(
@@ -138,7 +128,7 @@ async function generateTracingEvent(eventNumber) {
     let person = people[Math.floor(Math.random() * people.length)];
     let personTwo = people[Math.floor(Math.random() * people.length)]
 
-    populateCoupleMap(person, personTwo, coupleMap);
+    populateMap(person, personTwo, coupleMap);
 
     store.addQuad(
         namedNode(RoxiPrefix + "contactTracingPost/" + eventNumber),

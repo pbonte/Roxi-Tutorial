@@ -2,16 +2,16 @@
   "name": "roxi-tutorial",
   "version": "1.0.0",
   "description": "A version of the RSP4J tutorial given at the Web Conf 2022, with Roxi. ",
-  "main": "index.js",
+  "main": "src/index.js",
   "module": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/argahsuknesib/Roxi-Tutorial.git"
   },
-  "author": "",
+  "author": "Kushagra Singh Bisen (https://argahsuknesib.github.io/)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/argahsuknesib/Roxi-Tutorial/issues"
