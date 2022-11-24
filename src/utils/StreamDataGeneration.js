@@ -65,11 +65,6 @@ async function generateObservationEvent(eventNumber) {
                             namedNode(sosa + "madeBySensor"),
                             namedNode(RoxiPrefix + "sensorRFID" + "-Blue")
                         )
-                        store.addQuad(
-                            namedNode(RoxiPrefix + "sensorRFID" + "-Blue"),
-                            namedNode(sosa + "isPropertyOf"),
-                            namedNode(RoxiPrefix + "Blue")
-                        )
                     break;
                 case 'Red':
                     store.addQuad(

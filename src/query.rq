@@ -8,12 +8,15 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 
 # Run the ?s ?p ?o query to see all the values returned from the stream
+
 select ?s ?p ?o where {
     ?s ?p ?o
 }
 
 # Delete this query
 # Task 1: Write a query to find the location (?room) of the person (?person)
+
+
 
 
 
@@ -26,14 +29,13 @@ select ?s ?p ?o where {
 # Task 2: Write a query to find out the COVID positive person (?person) and 
 # his location (?room)
 
- 
+
 
 
 
 # Delete the above query.
 # Task 3: Write a query to find the person at risk of 
 # COVID (?personAtRisk )with contact tracing.
-
 
 
 
