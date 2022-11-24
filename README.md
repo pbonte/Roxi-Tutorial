@@ -16,7 +16,7 @@ The individuals in each room will be moving around from one room to the other.
 
 The standard setup of the COVID scenario,
 
-![COVID Scenario](fig/roxi.png)
+![COVID Scenario](https://argahsuknesib.github.io/static-files/figures/roxi.png)
 
 ## How to Start?
 
