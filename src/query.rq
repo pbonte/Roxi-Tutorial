@@ -18,7 +18,6 @@ select ?s ?p ?o where {
 
 
 
-
 # Remember : You have to add the rules (in src/rules.n3 file) 
 # to find the location. One rule for getting the location from SOSA 
 # RFID sensor and another to align the facebook and RFID localisation.
@@ -26,6 +25,8 @@ select ?s ?p ?o where {
 # Delete the above query.
 # Task 2: Write a query to find out the COVID positive person (?person) and 
 # his location (?room)
+
+
 
 
 

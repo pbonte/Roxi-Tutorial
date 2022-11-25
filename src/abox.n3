@@ -5,5 +5,5 @@
 @prefix sioc: <http://www.w3.org/Submission/sioc-spec/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-:sensorRFID-Blue sosa:hasLocation :Blue
+:sensorRFID-Blue sosa:isPropertyOf :Blue
 :sensorRFID-Red saref:isPropertyOf :Red
