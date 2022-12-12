@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/argahsuknesib/Roxi-Tutorial#readme",
   "devDependencies": {
-    "n3": "^1.16.3",
-    "roxi-js": "file:pkg"
+    "n3": "^1.16.3"
+  },
+  "dependencies": {
+    "roxi-js": "^0.1.3"
   }
 }

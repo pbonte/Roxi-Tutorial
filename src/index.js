@@ -11,9 +11,9 @@ let counterValue = 0;
 Configuring The Roxi Reasoner
 */
 
-let query = fs.readFileSync('src/query.rq', 'utf-8').toString();
-let rules = fs.readFileSync('src/rules.n3', 'utf-8').toString();
-let abox = fs.readFileSync('src/abox.n3', 'utf-8').toString();
+let query = fs.readFileSync('./query.rq', 'utf-8').toString();
+let rules = fs.readFileSync('./rules.n3', 'utf-8').toString();
+let abox = fs.readFileSync('./abox.n3', 'utf-8').toString();
 let windowWidth = 60;
 let windowSlide = 15;
 let numberOfObservationsToBeGenerated = 100;
@@ -57,7 +57,6 @@ async function executeRSP() {
 async function rsp_callback(bindings) {
     console.log('------------------------------------------------------');
     console.log(`Variable   ------------Value---------------  Timestamp`);
-    console.log();
     for (const value of bindings) {
         console.log(`${value.getVar()}  ${value.getValue()} @ ${bindingCounter}`);
         bindingCounter = bindingCounter + 1;
@@ -66,11 +65,7 @@ async function rsp_callback(bindings) {
 
 async function addToRSP(store) {
     for (const quad of store) {
-        let subject = quad.subject.value;
-        let predicate = quad.predicate.value;
-        let object = quad.object.value;
-        let triple = (`<${subject}> <${predicate}> <${object}> . `)
-        streamingEngine.add(triple, eventTimestamp);
+        streamingEngine.add(`<${quad.subject.value}> <${quad.predicate.value}> <${quad.object.value}>`, eventTimestamp);
         eventTimestamp = eventTimestamp + 1;
     }
 }
