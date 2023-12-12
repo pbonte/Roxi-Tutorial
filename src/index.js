@@ -11,9 +11,41 @@ let counterValue = 0;
 Configuring The Roxi Reasoner
 */
 
-let query = fs.readFileSync('./query.rq', 'utf-8').toString();
-let rules = fs.readFileSync('./rules.n3', 'utf-8').toString();
-let abox = fs.readFileSync('./abox.n3', 'utf-8').toString();
+let query = `
+PREFIX : <http://pbonte.github.io/roxi/> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX sosa: <http://www.w3.org/ns/sosa/> 
+PREFIX saref: <https://saref.etsi.org/core/> 
+PREFIX sioc: <http://www.w3.org/Submission/sioc-spec/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+
+
+# Run the ?s ?p ?o query to see all the values returned from the stream
+
+select ?s ?p ?o where {
+    ?s ?p ?o
+}
+`;
+let rules = `
+@prefix : <http://pbonte.github.io/roxi/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix saref: <https://saref.etsi.org/core/> .
+@prefix sioc: <http://www.w3.org/Submission/sioc-spec/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+`;
+let abox =`
+@prefix : <http://pbonte.github.io/roxi/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix saref: <https://saref.etsi.org/core/> .
+@prefix sioc: <http://www.w3.org/Submission/sioc-spec/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:sensorRFID-Blue sosa:hasLocation :Blue
+:sensorRFID-Red saref:isPropertyOf :Red
+ `;
 let windowWidth = 60;
 let windowSlide = 15;
 let numberOfObservationsToBeGenerated = 100;
