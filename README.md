@@ -107,12 +107,12 @@ A sample SOSA ontology observation from the blue room.
 
 ```
 :observationX rdf:type sosa:Observation .
-:observationX sosa:hasFeatureofInterest :Carl .
+:observationX sosa:hasFeatureOfInterest :Carl .
 :observationX sosa:madeBySensor :sensorRFID-Blue .
 :sensorRFID-Blue sosa:hasLocation :Blue .
 ```
 
-- Add a rule in `src/rules.n3` to infer the `?person :isIn ?room` relation for the sensor events resulting from the Blue room.
+- **TODO:** Add a rule in `src/rules.n3` to infer the `?person :isIn ?room` relation for the sensor events resulting from the Blue room.
 
 Now you can find the location of the person who was reported with RFID sensor observation with the following query.
 
@@ -132,7 +132,7 @@ select ?person ?room where {
 
 We can see that both RFID and Facebook Post observe the localisation of a person, so it makes sense to align these properties to get the location of a person.
 
-- Open the `src/rules.n3` file, and add a rule to align the location update from the Facebook check-in posts (:hasCheckIn) to the location updates from the RFID sensor (:isIn) . This will allow us to query both the location updates in the same way at the same time.
+- **TODO:** Open the `src/rules.n3` file, and add a rule to align the location update from the Facebook check-in posts (:hasCheckIn) to the location updates from the RFID sensor (:isIn) . This will allow us to query both the location updates in the same way at the same time.
 
 Once the rules have been aligned, re-run the program with:
 
@@ -160,7 +160,7 @@ The covid test result events describes which person is COVID positive. An exampl
 :Elena :hasResult :positive .
 ```
 
-- Write a query to find out the COVID-positive person (?person) and theirr location (?room) by adding and using the `:hasResult` property to check the person is COVID-positive.
+- **TODO:** Write a query to find out the COVID-positive person (?person) and their location (?room) by adding and using the `:hasResult` property to check the person is COVID-positive.
 
 Once the query is written, re-run the program with
 
@@ -184,7 +184,7 @@ We also have a contact tracing stream, containing the following observations:
 
 So, if John received a positive COVID test and Elena has been detected in the presence of  John, Elena might be at Risk.
 
-- Write a query to find the person at risk of COVID (?personAtRisk) trough contact tracing with a positive person. 
+- **TODO:** Write a query to find the person at risk of COVID (?personAtRisk) trough contact tracing with a positive person.
 - Use  the `:detectedWith` property.
 
 Once the query is written, re-run the program with
