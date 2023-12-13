@@ -54,7 +54,7 @@ async function generateObservationEvent(eventNumber) {
                         namedNode(RoxiPrefix + "observation/" + eventNumber),
                         namedNode(RDFType),
                         namedNode(sosa + "Observation")
-                    ),
+                        ),
                         store.addQuad(
                             namedNode(RoxiPrefix + "observation/" + eventNumber),
                             namedNode(sosa + "hasFeatureOfInterest"),
@@ -64,6 +64,11 @@ async function generateObservationEvent(eventNumber) {
                             namedNode(RoxiPrefix + "observation/" + eventNumber),
                             namedNode(sosa + "madeBySensor"),
                             namedNode(RoxiPrefix + "sensorRFID" + "-Blue")
+                        ),
+                        store.addQuad(
+                            namedNode(RoxiPrefix + "sensorRFID" + "-Blue"),
+                            namedNode(sosa + "hasLocation"),
+                            namedNode(RoxiPrefix + "Blue")
                         )
                     break;
                 case 'Red':
@@ -127,7 +132,7 @@ async function generateTracingEvent(eventNumber) {
 
     store.addQuad(
         namedNode(RoxiPrefix + "contactTracingPost/" + eventNumber),
-        namedNode(rdfs + "subClassOf"),
+        namedNode(RDFType),
         namedNode(sioc + "Post")
     )
     store.addQuad(
@@ -145,6 +150,7 @@ async function generateTracingEvent(eventNumber) {
         namedNode(RoxiPrefix + "detectedWith"),
         namedNode(RoxiPrefix + person)
     )
+
     return store;
 
 }
