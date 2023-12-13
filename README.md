@@ -25,7 +25,7 @@ Make sure to install [NodeJS](https://nodejs.org/en/), npm and git if not instal
 Clone the repository from [here](https://github.com/pbonte/Roxi-Tutorial)
 
 ```
-git clone https://github.com/argahsuknesib/Roxi-Tutorial
+git clone https://github.com/pbonte/Roxi-Tutorial
 cd Roxi-Tutorial
 npm install
 cd src
